@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'dart:math';
 
 void main() => runApp(
       MaterialApp(
         home: BaliPage(),
       ),
     );
-class BaliPage extends StatefulWidget {
-  @override
-  _BaliPageState createState() => _BaliPageState();
-}
 
-class _BaliPageState extends State<BaliPage> {
+
+class BaliPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,12 +19,45 @@ class _BaliPageState extends State<BaliPage> {
         title: Center(
           child: Text(
             'Ask me anything',
-            style: GoogleFonts.getFont('Jost'),
+            style: GoogleFonts.getFont('Hind'),
           ),
         ),
       ),
-      body: Container(
-        
+      body: Ball(),
+    );
+  }
+}
+
+class Ball extends StatefulWidget {
+  @override
+  _BallState createState() => _BallState();
+}
+
+int ballNumber = 1;
+
+class _BallState extends State<Ball> {
+  
+
+  void changeNumber(){
+    ballNumber = Random().nextInt(4) + 1;
+    print(ballNumber);
+  } 
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Center(
+        child: FlatButton(
+          onPressed: (){
+            setState(() {
+              changeNumber();
+            });
+            
+          },
+          child: Image.asset(
+            'images/ball$ballNumber.png'
+          ),
+        )
       ),
     );
   }
